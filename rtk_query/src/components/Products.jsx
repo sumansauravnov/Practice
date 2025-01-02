@@ -1,8 +1,9 @@
 import React from "react";
-import { useGetAllProductsQuery } from "../Redux/apiService";
+import { useDeleteProductByIdMutation, useGetAllProductsQuery } from "../Redux/apiService";
 
 const Products = () => {
   const { data, isLoading, isError } = useGetAllProductsQuery();
+const [deleteProduct]=useDeleteProductByIdMutation();
 
   return (
     <>
@@ -11,6 +12,7 @@ const Products = () => {
         {data?.map((item) => (
           <div key={item.id}>
             <p>{item.title}</p>
+            <button onClick={()=>deleteProduct(item.id)}>Delete</button>
           </div>
         ))}
       </div>
